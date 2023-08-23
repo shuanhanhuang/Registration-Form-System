@@ -21,9 +21,6 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <!-- <li class="nav-item active">
-              <a class="nav-link" href="/homePost/">新增 <span class="sr-only">(current)</span></a>
-            </li> -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                 Dropdown
@@ -39,7 +36,7 @@
           </ul>
           <ul class="navbar-nav ml-2">
             <li class="nav-item active">
-              <a class="nav-link disabled" style="color: green;">{{username}} <span class="sr-only">(current)</span></a>
+              <a class="nav-link disabled" style="color: green;">{{firstname}} <span class="sr-only">(current)</span></a>
             </li>
           </ul>
           <ul class="navbar-nav ml-2">
@@ -99,13 +96,13 @@
             <tr>
             <tr><th>完成日期</th><td>{{homeform.cEndDate}}</td></tr>
             <tr>
-              <th>接收人</th>
+              <th>收件人</th>
               <td>
-                <input name="cReceive" type="radio" value="Gen" checked="checked"/>總經理
-                <input name="cReceive" type="radio" value="viceP"/>副總
-                <input name="cReceive" type="radio" value="ds"/>業務設計部
-                <input name="cReceive" type="radio" value="fs"/>廠務部
-                <input name="cReceive" type="radio" value="None"/>無
+                <select class="form-control" id="taskTypeSelect" name="cReceive">
+                  {% for key,value in homeform.REC %}
+                      <option value="{{ key }}" name="cReceive">{{ value }}</option>
+                  {% endfor %}
+                </select>
               </td>
             </tr>
             <tr>
@@ -145,12 +142,6 @@
         $(location).attr("href","/logout/");
       }
 
-      // function BackToSign(){
-      //   $(location).attr("href","/indexSign/")
-      // }
-      // function BackToHome(){
-      //   $(location).attr("href","/homeIndex/")
-      // }
     </script>
   
 

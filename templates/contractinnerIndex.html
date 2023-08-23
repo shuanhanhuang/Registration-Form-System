@@ -16,7 +16,7 @@
   
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="/homeIndex/">Home</a>
+      <a class="navbar-brand" href="/homeIndex/">首頁</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,9 +26,9 @@
           <ul class="navbar-nav ml-2">
             <li class="nav-item">
               <button class="btn btn-success my-2 my-sm-0" onclick="BacktoContract()">回工程發包議價記錄單</button>
-            </li>
+            </li>  
           </ul>
-          {% if home.cLock == "否" %}
+          {% if home.cLock == "否" and home.cReceive == "None" %}
             <ul class="navbar-nav ml-2">
               <li class="nav-item">
                 <button class="btn btn-light my-2 my-sm-0" id="{{id.cNumber}}/{{unit.id}}" onclick="New(event)">新增</button>
@@ -37,12 +37,18 @@
           {% endif %}
           <ul class="navbar-nav ml-2">
             <li class="nav-item">
-              <button class="btn btn-warning my-2 my-sm-0" id="{{username}}" onclick="perosonIndex(event)">待簽</button>
+              <button class="btn btn-warning my-2 my-sm-0" id="{{firstname}}" onclick="perosonIndex(event)">待簽
+                {% if allpersonCount != 0 %}
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{allpersonCount}}
+                  </span>
+                {% endif %}
+              </button>
             </li>
           </ul>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              其他表單
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/signallIndex/">簽呈資料</a>
@@ -59,7 +65,7 @@
         </form>
         <ul class="navbar-nav ml-2">
           <li class="nav-item active">
-            <a class="nav-link disabled" style="color: green;">{{username}} <span class="sr-only">(current)</span></a>
+            <a class="nav-link disabled" style="color: green;">{{firstname}} <span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <ul class="navbar-nav ml-2">
@@ -96,7 +102,7 @@
               <td>{{unit.cRemark}}</td>
               <td>
                 <button type="button" class="btn btn-outline-primary" id="{{id.cNumber}}/{{unit.id}}" onclick="View(event)">檢視</button>
-                {% if home.cLock == "否" %}
+                {% if home.cLock == "否" and home.cReceive == "None" %}
                   <button type="button" class="btn btn-outline-info" id="{{id.cNumber}}/{{unit.id}}" onclick="Edit(event)">編輯</button>
                   <button type="button" class="btn btn-outline-secondary" id="{{id.cNumber}}/{{unit.id}}" onclick="Delete(event)">刪除</button>
                 {% endif %}

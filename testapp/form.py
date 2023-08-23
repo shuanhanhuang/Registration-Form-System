@@ -2,6 +2,7 @@ from django import forms
 from datetime import datetime
 from testapp.models import Home
 class HomeForm(forms.Form):
+    REC = (("None","無"),("郭文龍","郭文龍"),("侯國興","侯國興"),("郭文河","郭文河"),("高晟琅","高晟琅"),("黃睿堂","黃睿堂"),("鄭任雯","鄭任雯"),("高麗華","高麗華"),("侯宗仁","侯宗仁"),("黃美禎","黃美禎"),("江水木","江水木"),("吳建進","吳建進"),("王韋盛","王韋盛"),("陳佳欣","陳佳欣"),("蔡孟亭","蔡孟亭"),("馮文明","馮文明"),("陳恆瑞","陳恆瑞"),("郭文欽","郭文欽"),("陳春能","陳春能"),("黃春北","黃春北"))
     cNumber = forms.CharField(max_length=50,initial="免填",disabled=True)
     cAuther = forms.CharField(max_length=20,initial="免填",disabled=True)#姓名
     cDepartment = forms.CharField(max_length=50)#單位
@@ -10,14 +11,26 @@ class HomeForm(forms.Form):
     cDate = forms.DateField(initial=datetime.now())#日期
     cEndDate = forms.DateField(initial=datetime.now(),required=False)
     cLock = forms.CharField(max_length=5,initial="否")
-    cReceive = forms.CharField(max_length=20,required=False)
-    # cCheckuplaod = forms.CharField(max_length=5,initial="否")
+    cReceive = forms.CharField(max_length=20,required=False,widget=forms.Select(choices=REC))
     cFile = forms.FileField(required=False)
+    
+class CountForm(forms.Form):
+	count = forms.IntegerField(initial=0,required=False)
+    
+class ReturnedForm(forms.Form):
+	REC = (("None","無"),("郭文龍","郭文龍"),("侯國興","侯國興"),("郭文河","郭文河"),("高晟琅","高晟琅"),("黃睿堂","黃睿堂"),("鄭任雯","鄭任雯"),("高麗華","高麗華"),("侯宗仁","侯宗仁"),("黃美禎","黃美禎"),("江水木","江水木"),("吳建進","吳建進"),("王韋盛","王韋盛"),("陳佳欣","陳佳欣"),("蔡孟亭","蔡孟亭"),("馮文明","馮文明"),("陳恆瑞","陳恆瑞"),("郭文欽","郭文欽"),("陳春能","陳春能"),("黃春北","黃春北"))
+	HOW = (("同意","同意"),("駁回","駁回"))
+	cName = forms.CharField(max_length=20,initial="免填",disabled=True)#誰駁回的(姓名)
+	cHow = forms.CharField(max_length=20,required=False,widget=forms.Select(choices=HOW))#同意/駁回
+	cTransfer = forms.CharField(max_length=20,required=False)#被駁回的(姓名)
+	cIllustrate = forms.CharField(widget=forms.Textarea, required=False)
 
 class SignedForm (forms.Form):
 	cNumber = forms.CharField(max_length=50,initial='免填',disabled=True)
 	cJob_title = forms.CharField(max_length=50,initial='',required=False)
-	cSubject = forms.CharField(max_length=255, initial='')
+	cSubject = forms.CharField(max_length=255, initial='') # ,required=False
+	cProposed=forms.CharField(widget=forms.Textarea,required=False)#擬辦
+	cCheck=forms.CharField(widget=forms.Textarea,required=False)#批示
 	cDiscription = forms.CharField(widget=forms.Textarea,required=False)
 
 class MeetingInnerForm(forms.Form):
@@ -72,6 +85,7 @@ class ContractForm(forms.Form):
 	cManager_Sign = forms.CharField(max_length=20,required=False) #部門主管簽名
 	cDepartmentManager_Sign = forms.CharField(max_length=20,required=False) #單位主管簽名
 	cUndertaker = forms.CharField(max_length=20,required=False)#承辦人
+	
 class ChangeForm(forms.Form):
     cNumber = forms.CharField(max_length=50, initial='免填',disabled=True) #編號
     cProjectName = forms.CharField(max_length=50, initial='') #專案名稱

@@ -26,9 +26,13 @@ from testapp.views import HomePage,login,logout,perosonIndex,open1,\
     contactallIndex,contactView,contactPost,contactEdit,\
     contractallIndex,contractPost,contractEdit,contractView,\
     contractinnerDelete,contractinnerIndex,contractinnerEdit,contractinnerPost,contractinnerView,\
-    changeallIndex,changeView,changeEdit,changePost
+    changeallIndex,changeView,changeEdit,changePost,\
+    homeCopyPost,signCopyPost,meetingCopyPost,contactCopyPost,contractCopyPost,changeCopyPost,\
+    returnedPost,returnedIndex,returnedDelete,download_workbook
+
 urlpatterns = [
     path('',HomePage),
+    path('download_workbook/',download_workbook,name = 'download_workbook'),
     path('HomePage/',HomePage),
     path('login/', login),
     path('logout/', logout),
@@ -78,6 +82,16 @@ urlpatterns = [
     path('changeEdit/<str:cNumber>/<int:id>/<str:mode>',changeEdit),
     path('changePost/<str:cNumber>/',changePost),
 
+    path('homeCopyPost/<str:cNumber1>/',homeCopyPost),
+    path('signCopyPost/<str:cNumber>/<str:thisNumber>/',signCopyPost),
+    path('meetingCopyPost/<str:cNumber>/<str:thisNumber>/',meetingCopyPost),
+    path('contactCopyPost/<str:cNumber>/<str:thisNumber>/',contactCopyPost),
+    path('contractCopyPost/<str:cNumber>/<str:thisNumber>/',contractCopyPost),
+    path('changeCopyPost/<str:cNumber>/<str:thisNumber>/',changeCopyPost),
+
+    path('returnedPost/<int:id>/',returnedPost),
+    path('returnedIndex/<int:id>/',returnedIndex),
+    path('returnedDelete/<int:id2>/<int:id>/',returnedDelete),
 
     path('admin/', admin.site.urls),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
